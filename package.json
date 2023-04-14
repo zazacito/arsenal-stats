@@ -1,0 +1,31 @@
+{
+  "name": "arsenal-stats",
+  "version": "1.0.0",
+  "description": "A cool package to visualise data from the Invincible season",
+  "main": "index.js",
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.15",
+    "@types/highcharts": "^7.0.0",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "axios": "^1.3.5",
+    "esbuild-darwin-arm64": "^0.15.18",
+    "highcharts": "^10.3.3",
+    "highcharts-react-official": "^3.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.5.0"
+  },
+  "devDependencies": {
+    "vite": "^4.2.1"
+  },
+  "scripts": {
+    "test": "npm test",
+    "dev": "vite"
+  },
+  "author": "Zazacito",
+  "license": "ISC"
+}
