@@ -2,5 +2,8 @@
 module.exports = {
   build: {
     assetsDir: "static"
-  }
+  },
+  base: "/arsenal-stats/"
 }
+
+

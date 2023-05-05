@@ -1,37 +1,48 @@
-import React from 'react';
-import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
+import React from "react";
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
 
 const BarChart = ({ data, title }) => {
   const options = {
     chart: {
-      type: 'column'
+      type: "column",
     },
     title: {
-      text: title
+      text: title,
+    },
+    credits: { enabled: false },
+    legend: { enabled: false },
+    plotOptions: {
+      column: {
+        dataLabels: { enabled: true },
+      },
     },
     xAxis: {
       categories: data.map((item) => item.name),
       title: {
-        text: 'Player'
-      }
+        text: "Player",
+      },
     },
     yAxis: {
       title: {
-        text: 'Goals'
-      }
+        text: "Goals",
+      },
     },
-    series: [{
-      name: 'Goals',
-      data: data.map((item) => item.goals)
-    }]
+    series: [
+      {
+        name: "Goals",
+        data: data.map((item) => item.goals),
+      },
+    ],
   };
 
   return (
     <div>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+      />
     </div>
-
   );
 };
 

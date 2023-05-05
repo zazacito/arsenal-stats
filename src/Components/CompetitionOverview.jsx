@@ -149,7 +149,7 @@ const CompetitionOverview = ({
                   XGoal value is.
                 </Typography>
                 <hr />
-                <Typography variant="body1" align="center">
+                {/* <Typography variant="body1" align="center">
                   If you want more insights about the
                   XGoals, by player, by match or some cool
                   visualisation.
@@ -161,7 +161,7 @@ const CompetitionOverview = ({
                   >
                     Click Here
                   </Button>
-                </Typography>
+                </Typography> */}
               </CardContent>
             </Card>
           </Grid>

@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import "../styles.css";
 import XGoalsChart from "./XGoalsChart";
+import XGoalsEvolutionChart from "./XGoalsEvolutionChart";
 function XGoals() {
   const [competitionData, setCompetitionData] =
     useState(null);
@@ -47,8 +48,10 @@ function XGoals() {
     goals,
     xgoals,
     xGoalsArray,
+    xGoalsEvolution,
   } = competition_info;
 
+  console.log(xGoalsEvolution);
   return (
     <Fragment>
       <Box
@@ -78,6 +81,33 @@ function XGoals() {
         }}
       >
         <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h5"
+              className="red-text"
+              sx={{
+                marginBottom: "4px",
+                textAlign: "center",
+              }}
+            >
+              XGoals Difference During The Season
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                marginBottom: "4px",
+                textAlign: "center",
+              }}
+            >
+              You can use the select's to filters the shots
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <XGoalsEvolutionChart
+              title="Whole Season"
+              data={xGoalsEvolution}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Typography
               variant="h5"

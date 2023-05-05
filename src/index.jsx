@@ -13,6 +13,7 @@ import "./styles.css";
 
 import Summary from "./Components/Summary";
 import XGoals from "./Components/XGoals";
+import TopScorers from "./Components/TopScorers";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(false);
@@ -118,6 +119,7 @@ function App() {
       <body>
         {view == "summary" && <Summary />}
         {view == "xgoals" && <XGoals />}
+        {view == "topscorer" && <TopScorers />}
       </body>
     </div>
   );

@@ -84,7 +84,9 @@ const computeInformationAboutSeason = (desiredCompetition, teamId = 1) => {
       home: 0,
       away: 0,
     },
-    xGoalsArray: []
+    xGoalsArray: [],
+    xGoalsEvolution: { venues: [], for: [], against: [], results: [] },
+    topScorers: []
   };
 
   desiredCompetition.matches.forEach((match, index) => {
@@ -140,7 +142,9 @@ const computeInformationAboutSeason = (desiredCompetition, teamId = 1) => {
     competition_info.xgoals[venue] += totalXGoalsFor;
     competition_info.xgoals.total += totalXGoalsFor;
 
+    let opponentName = home_team.home_team_name + " Away";
     if (venue === "home") {
+      opponentName = away_team.away_team_name + " Home";
       match.xGoalsHome = totalXGoalsFor;
       match.xGoalsAway = totalXGoalsAgainst;
     } else {
@@ -155,6 +159,13 @@ const computeInformationAboutSeason = (desiredCompetition, teamId = 1) => {
         competition_info.goals.for++;
         competition_info.goals[venue]++;
         competition_info.goals.total++;
+
+        if (competition_info.topScorers.filter((element) => element.name === shot.player.name).length === 1) {
+          let topScorerData = competition_info.topScorers.filter((element) => element.name === shot.player.name)[0];
+          topScorerData.goals++;
+        } else {
+          competition_info.topScorers.push({ name: shot.player.name, goals: 1 })
+        }
       }
 
       let newShot = {
@@ -166,7 +177,7 @@ const computeInformationAboutSeason = (desiredCompetition, teamId = 1) => {
         type: shot.shot.type.name,
         outcome: shot.shot.outcome.name,
         bodyPart: shot.shot.body_part.name,
-        game: "J" + (index + 1) + " " + home_team.home_team_name + " vs " + away_team.away_team_name
+        game: home_team.home_team_name + " vs " + away_team.away_team_name
       }
       competition_info.xGoalsArray.push(newShot)
       xGoalsData.push(newShot)
@@ -179,8 +190,41 @@ const computeInformationAboutSeason = (desiredCompetition, teamId = 1) => {
       }
     });
 
+
+    competition_info.xGoalsEvolution.venues.push("J" + (index + 1) + " " + opponentName)
+    competition_info.xGoalsEvolution.for.push(totalXGoalsFor)
+    competition_info.xGoalsEvolution.against.push(totalXGoalsAgainst)
+    // competition_info.xGoalsEvolution.results.push(match.result[0].toUpperCase())
+    let color = "green"
+
+    competition_info.xGoalsEvolution.results.push({
+      from: index - 0.5,
+      to: index + 0.5,
+      color: '#FFFFFF',
+      borderColor: "black",
+      borderWidth: 0,
+      label: {
+        text: match.result[0].toUpperCase(),
+        style: {
+          color: match.result[0].toUpperCase() === "W" ? "green" : "red"
+        },
+        y: 50
+      }
+    })
   });
 
+
+  competition_info.topScorers = competition_info.topScorers.sort((a, b) => {
+    const dateA = (a.goals);
+    const dateB = (b.goals);
+    if (dateA < dateB) {
+      return -1;
+    }
+    if (dateA > dateB) {
+      return 1;
+    }
+    return 0;
+  });
   desiredCompetition["competition_info"] = competition_info;
   return desiredCompetition;
 };
